@@ -24,6 +24,7 @@ public class Movie implements Parcelable {
     private double movieRating;
     private String movieReleaseDate;
     private List<String> IMAGE_SIZES;
+    private int movieId;
 
     public Movie(JSONObject jsonObject) throws JSONException {
         movieImage = jsonObject.getString("poster_path");
@@ -32,6 +33,7 @@ public class Movie implements Parcelable {
         backdropImage = jsonObject.getString("backdrop_path");
         movieRating = jsonObject.getDouble("vote_average");
         movieReleaseDate = jsonObject.getString("release_date");
+        movieId = jsonObject.getInt("id");
     }
 
     protected Movie(Parcel in) {
@@ -63,6 +65,7 @@ public class Movie implements Parcelable {
         return movies;
     }
 
+    public int getMovieId() { return movieId; }
     public String getBackdropImage(){
         return "https://image.tmdb.org/t/p/"+"w342"+ backdropImage;
     }
@@ -76,7 +79,13 @@ public class Movie implements Parcelable {
         return movieDescription;
     }
     public double getMovieRating(){return movieRating;};
-    public String getMovieReleaseDate(){return movieReleaseDate;}
+    public String getMovieReleaseDate(){
+        //2020-09-21 is the format we receive
+        String year = movieReleaseDate.substring(0,4);
+        String month = movieReleaseDate.substring(5,7);
+        String day = movieReleaseDate.substring(8);
+        return month +"/"+day+"/"+ year;
+    }
 
     private void getMovieSizes(){
         AsyncHttpClient client = new AsyncHttpClient(); //to fetch data from internet
@@ -104,9 +113,6 @@ public class Movie implements Parcelable {
                 Log.d("Movie", "onFailure");
             }
         });
-
-
-
     }
 
     @Override

@@ -36,7 +36,8 @@ public class  MovieItemAdapter extends RecyclerView.Adapter<MovieItemAdapter.Vie
     private int currentPage;
     private JsonHttpResponseHandler response;
     private final String TAG = "MovieAdapter";
-    public static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&page=" ;
+    private static final String API_KEY = "a07e22bc18f5cb106bfe4cc1f83ad8ed";
+    private static final String NOW_PLAYING_URL = "https://api.themoviedb.org/3/movie/now_playing?api_key="+API_KEY+"&page=" ;
     private OnMovieClickListener onMovieClickListenerA;
 
     public MovieItemAdapter(Context context, OnMovieClickListener onMovieClickListenerA) {
@@ -140,4 +141,6 @@ public class  MovieItemAdapter extends RecyclerView.Adapter<MovieItemAdapter.Vie
     public interface OnMovieClickListener{
         void onMovieClick(int position);
     }
+
+
 }

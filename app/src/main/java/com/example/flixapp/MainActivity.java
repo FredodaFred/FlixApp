@@ -76,7 +76,7 @@ public class MainActivity extends AppCompatActivity implements MovieItemAdapter.
     public void onMovieClick(int position) {
         Log.d(TAG, "Movie item clicked");
         Intent intent = new Intent(this, DetailActivity.class);
-        intent.putExtra("movie", movies.get(position)); //Scared about this line tbh
+        intent.putExtra("movie", movies.get(position));
         startActivity(intent);
     }
 }
